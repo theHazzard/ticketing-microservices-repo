@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: theh8/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - dest: .
+            src: 'src/**/*.ts' 
+    - image: theh8/ticketing-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: theh8/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - dest: .
+            src: 'src/**/*.ts' 
+    - image: theh8/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - dest: .
+            src: 'src/**/*.ts' 
+    - image: theh8/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - dest: .
+            src: 'src/**/*.ts' 
+    - image: theh8/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - dest: .
+            src: 'src/**/*.ts' 
