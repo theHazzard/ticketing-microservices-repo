@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@cygnetops/common';
+import { validateRequest, BadRequestError } from '@hazzard-org/common';
 
 import { User } from '../models/user';
 
